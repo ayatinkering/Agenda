@@ -1,0 +1,17 @@
+#defines a PostgreSQL 16 container
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: agentic-calendar-app #database
+    restart: unless-stopped
+    ports:
+      - "5442:5432" #port mapping: backend running on your computer connects to localhost port 5442, which Docker forwards to PostgreSQL’s port 5432 inside the container
+    environment:
+      POSTGRES_USER: postgres #username
+      POSTGRES_PASSWORD: postgres #password
+      POSTGRES_DB: agentic_calendar_app_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
